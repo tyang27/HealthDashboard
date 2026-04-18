@@ -1,5 +1,7 @@
-# Data files
+# Data files (exclude MF exports, include reference data)
 data/**/*.csv
+!data/food_carbon_footprint.csv
+!data/food_water_footprint.csv
 data/**/*.json
 data/**/*.xlsx
 data/**/*.xls

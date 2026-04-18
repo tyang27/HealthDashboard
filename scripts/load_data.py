@@ -10,6 +10,12 @@ def load_nutrition():
     nutrition_file = sorted(DATA_DIR.glob("macrofactor_nutrition/*.csv"))[-1]
     df = pd.read_csv(nutrition_file)
     df["Date"] = pd.to_datetime(df["Date"])
+
+    # Fix serving weights: if unit is ml or g, use Serving Qty as weight (1ml = 1g, 1g = 1g)
+    for unit in ["ml", "g"]:
+        mask = df["Serving Size"].str.lower() == unit
+        df.loc[mask, "Serving Weight (g)"] = df.loc[mask, "Serving Qty"]
+
     return df
 
 
